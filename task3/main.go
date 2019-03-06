@@ -31,7 +31,7 @@ func StoreToFile(filename string, persons []Person) error {
 	}
 
 	os.Remove(filename)
-	file, err := os.OpenFile(filename, os.O_CREATE, 0644)
+	file, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
 	//file, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
 		return err
@@ -161,7 +161,7 @@ func Perform(args Arguments, writer io.Writer) error {
 				}
 			}
 			if !passed {
-				errString := "Item with id " + item + " not found"
+				errString := "Item with id " + operatedId + " not found"
 				_, err = writer.Write([]byte(errString))
 				if err != nil {
 					return err
