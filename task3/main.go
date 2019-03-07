@@ -32,7 +32,6 @@ func StoreToFile(filename string, persons []Person) error {
 
 	os.Remove(filename)
 	file, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
-	//file, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
 		return err
 	}
@@ -41,10 +40,6 @@ func StoreToFile(filename string, persons []Person) error {
 	if err != nil {
 		return err
 	}
-	//err = file.Sync()
-	//if err != nil {
-	//	return err
-	//}
 	return nil
 }
 
@@ -85,7 +80,6 @@ func Perform(args Arguments, writer io.Writer) error {
 		}
 	}
 
-	//var item string
 	item := args["item"]
 	operatedId := args["id"]
 
@@ -104,10 +98,6 @@ func Perform(args Arguments, writer io.Writer) error {
 			for _, value := range persons {
 				if value.Id == person.Id {
 					errString := `Item with id ` + person.Id + ` already exists`
-					//var someBuffer bytes.Buffer
-					//someBuffer.WriteString("Item with id ")
-					//someBuffer.WriteString(person.Id)
-					//someBuffer.WriteString(" already exists")
 					writer.Write([]byte(errString))
 					foundSame = true
 				}
@@ -130,7 +120,6 @@ func Perform(args Arguments, writer io.Writer) error {
 		{
 			if operatedId == "" {
 				return errors.New("-id flag has to be specified")
-				//return errors.New("-id flag has to be specified")
 			}
 			for _, value := range persons {
 				if value.Id == operatedId {
@@ -174,12 +163,7 @@ func Perform(args Arguments, writer io.Writer) error {
 			}
 		}
 	default:
-		//errString := "Operation " + opName + " not allowed!"
 		return fmt.Errorf("Operation %s not allowed!", opName)
-		//panic(errors.New(errString))
-		//panic(errors.New("Operation " + opName + " not allowed!"))
-		//return errors.New(`Operation abcd not allowed!`)
-		//return errors.New(errString)
 	}
 	return nil
 }
